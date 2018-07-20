@@ -3,18 +3,18 @@ Dainen Bugh
 Dainen.Bugh@gmail.com
 (630)926-8785
 
-#Instructions to Set Up Build Environment in Linux
+# Instructions to Set Up Build Environment in Linux
 
-##Download VSCode
+## Download VSCode
 1. Navigate to https://code.visualstudio.com/Download
 2. Download .deb installation file
 3. Open .deb file in Discover to install Visual Studio Code
 
-##Download .NET Core
+## Download .NET Core
 1. Open https://www.microsoft.com/net/learn/get-started/linux/ in a web browser
 2. Follow the instructions for step 1 to register the Microsoft key and install the .NET SDK
 
-##Install C# Extension
+## Install C# Extension
 1. Open VSCode
 2. ctrl+shift+x to open Extensions Marketplace
 3. Search for "C#"
@@ -22,13 +22,13 @@ Dainen.Bugh@gmail.com
 5. Click "Install"
 6. After installation has finished, "Install" button changes to "Reload." Click it.
 
-##Clone Repository
+## Clone Repository
 1. ctrl+shift+p, then type "git clone"
 2. Enter repository URL: http://github.com/DABugh/trussworks
 3. Select location to save cloned repository
 4. [Open Repository] on prompt
 
-##Build and Execute
+## Build and Execute
 1. ctrl+` to open integrated terminal
 2. Execute command: "dotnet run"
 3. Enter input. Empty line signals end of input.
