@@ -1,2 +1,2 @@
 # trussworks
-Programming test for TrussWorks appllication
+Programming test for TrussWorks application
