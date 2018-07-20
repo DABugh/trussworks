@@ -85,6 +85,14 @@ class CsvNormalizer
             errorStream = outStream;
         }
 
+        //TODO There seems to be a problem with CsvWriter when using both stdin and stdout.
+        //  Either one alone works. CsvReader still works, as the values can be written
+        //  with Console.WriteLine(). Values can also be written with outStream.WriteLine(),
+        //  but must be flushed after every statement. If using outStream were a permanent hack,
+        //  each string would have to be checked for the delimiter, and given
+        //  surrounding quotes if necessary, and delimiters would have to be manually added
+        //  between each field.
+
         using (CsvParser csvParser = new CsvParser(inStream))
         using (CsvWriter csvWriter = new CsvWriter(outStream))
         {
