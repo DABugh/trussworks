@@ -1,0 +1,22 @@
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\obj\Debug\netcoreapp2.1\TrussWorks Test.csprojAssemblyReference.cache
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\obj\Debug\netcoreapp2.1\TrussWorks Test.csproj.CoreCompileInputs.cache
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\obj\Debug\netcoreapp2.1\TrussWorks Test.AssemblyInfoInputs.cache
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\obj\Debug\netcoreapp2.1\TrussWorks Test.AssemblyInfo.cs
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\bin\Debug\netcoreapp2.1\TrussWorks Test.deps.json
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\bin\Debug\netcoreapp2.1\TrussWorks Test.runtimeconfig.json
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\bin\Debug\netcoreapp2.1\TrussWorks Test.runtimeconfig.dev.json
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\bin\Debug\netcoreapp2.1\TrussWorks Test.dll
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\bin\Debug\netcoreapp2.1\TrussWorks Test.pdb
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\obj\Debug\netcoreapp2.1\TrussWorks Test.dll
+C:\Users\DABugh\SkyDrive\Documents\VSCode\TrussWorks Test\obj\Debug\netcoreapp2.1\TrussWorks Test.pdb
+C:\Users\DABugh\Repositories\trussworks\bin\Debug\netcoreapp2.1\TrussWorks Test.deps.json
+C:\Users\DABugh\Repositories\trussworks\bin\Debug\netcoreapp2.1\TrussWorks Test.runtimeconfig.json
+C:\Users\DABugh\Repositories\trussworks\bin\Debug\netcoreapp2.1\TrussWorks Test.runtimeconfig.dev.json
+C:\Users\DABugh\Repositories\trussworks\bin\Debug\netcoreapp2.1\TrussWorks Test.dll
+C:\Users\DABugh\Repositories\trussworks\bin\Debug\netcoreapp2.1\TrussWorks Test.pdb
+C:\Users\DABugh\Repositories\trussworks\obj\Debug\netcoreapp2.1\TrussWorks Test.csprojAssemblyReference.cache
+C:\Users\DABugh\Repositories\trussworks\obj\Debug\netcoreapp2.1\TrussWorks Test.csproj.CoreCompileInputs.cache
+C:\Users\DABugh\Repositories\trussworks\obj\Debug\netcoreapp2.1\TrussWorks Test.AssemblyInfoInputs.cache
+C:\Users\DABugh\Repositories\trussworks\obj\Debug\netcoreapp2.1\TrussWorks Test.AssemblyInfo.cs
+C:\Users\DABugh\Repositories\trussworks\obj\Debug\netcoreapp2.1\TrussWorks Test.dll
+C:\Users\DABugh\Repositories\trussworks\obj\Debug\netcoreapp2.1\TrussWorks Test.pdb
