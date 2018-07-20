@@ -18,8 +18,8 @@ namespace TrussWorks_Test
             Console.OutputEncoding = outputEncoding;
 
             //TODO Set streams to stdin, stdout, stderr
-            //using( TextReader inStream = new StreamReader(Console.OpenStandardInput(), inputEncoding) )
-            using( TextReader inStream = new StreamReader("./Instructions/DB-sample-with-broken-utf8.csv", inputEncoding) )
+            using( TextReader inStream = new StreamReader(Console.OpenStandardInput(), inputEncoding) )
+            //using( TextReader inStream = new StreamReader("./Instructions/DB-sample-with-broken-utf8.csv", inputEncoding) )
             using( TextWriter outStream = new StreamWriter(Console.OpenStandardOutput(), outputEncoding) )
             //using (TextWriter outStream = new StreamWriter("./Instructions/DB-sample-with-broken-utf8.out.csv", false, outputEncoding) )
             using( TextWriter errStream = new StreamWriter(Console.OpenStandardError(), errorEncoding) )
