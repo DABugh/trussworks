@@ -76,7 +76,7 @@ class CsvNormalizer
     #endregion CONSTRUCTORS
     #region PUBLIC METHODS
 
-	//Reads in entire stream one record at a time, validates/modifies/formats fields as required, outputs one record at a time
+    //Reads in entire stream one record at a time, validates/modifies/formats fields as required, outputs one record at a time
     public void NormalizeCsv(TextReader inStream, TextWriter outStream,
         TextWriter errorStream = null)
     {
@@ -103,7 +103,7 @@ class CsvNormalizer
             if (record != null)
             {
                 headers = record;
-				//Send headers back to output
+                //Send headers back to output
                 for (int i = 0; i < headers.Length; i++)
                 {
                     csvWriter.WriteField(headers[i]);
@@ -168,7 +168,7 @@ class CsvNormalizer
                                 break;
                             case DataType.UnmodifiedString:
                                 //Validation already done, no conversion necessary
-								parsedRecord[i] = record[i];
+                                parsedRecord[i] = record[i];
                                 break;
                             default:
                                 //In theory, this line will only be called if a new datatype is added to the enum and
@@ -216,8 +216,8 @@ class CsvNormalizer
     #region PRIVATE METHODS
 
     //Adjust DateTime with an offset, then format
-	//TODO: Account for time zone in input string, set to DefaultTimezone (add this as class public property) if not specified in string;
-	//TODO: Instead of AddHours, request DateTime for NewTimezone
+    //TODO: Account for time zone in input string, set to DefaultTimezone (add this as class public property) if not specified in string;
+    //TODO: Instead of AddHours, request DateTime for NewTimezone
     private string ProcessTimestamp(string inString)
     {
         return DateTime.Parse(inString).AddHours(TimestampOffset).ToString(TimestampOutputFormat);
@@ -248,53 +248,53 @@ class CsvNormalizer
     }
 
     //Converts HH:MM:SS.MS to floating-point seconds
-	//Note: TimeSpan.Parse throws an exception if hours>23, even if no days are specified; using RegEx instead
-	//TODO This function is awful. Fix it.
+    //Note: TimeSpan.Parse throws an exception if hours>23, even if no days are specified; using RegEx instead
+    //TODO This function is awful. Fix it.
     private string ProcessDuration(string inString)
     {
-		String pattern = @"^(\d*?)([:\.]?)(\d*?)([:\.]?)(\d*?)([:\.]?)(\d*?)([:\.]?)(\d+)$";
-		Match match = Regex.Match(inString, pattern);
-		if(!match.Success)
-		{
-			throw(new FormatException("Cannot parse " + inString + " as a Duration"));
-		}
+        String pattern = @"^(\d*?)([:\.]?)(\d*?)([:\.]?)(\d*?)([:\.]?)(\d*?)([:\.]?)(\d+)$";
+        Match match = Regex.Match(inString, pattern);
+        if (!match.Success)
+        {
+            throw (new FormatException("Cannot parse " + inString + " as a Duration"));
+        }
 
-		int ms = 0;
-		int ss = 0;
-		int mm = 0;
-		int hh = 0;
-		int dd = 0;
-		int parseindex = match.Groups.Count-1;
+        int ms = 0;
+        int ss = 0;
+        int mm = 0;
+        int hh = 0;
+        int dd = 0;
+        int parseindex = match.Groups.Count - 1;
 
-		if(parseindex > 1 && string.Compare(match.Groups[parseindex-1].Value, ".") == 0)
-		{
-			int.TryParse(match.Groups[parseindex].Value, out ms);
-			parseindex -= 2;
-		}
-		if(parseindex >= 1)
-		{
-			int.TryParse(match.Groups[parseindex].Value, out ss);
-			parseindex -= 2;
-		}
-		if(parseindex >= 1)
-		{
-			int.TryParse(match.Groups[parseindex].Value, out mm);
-			parseindex -= 2;
-		}
-		if(parseindex >= 1)
-		{
-			int.TryParse(match.Groups[parseindex].Value, out hh);
-			parseindex -= 2;
-		}
-		if(parseindex >= 1)
-		{
-			int.TryParse(match.Groups[parseindex].Value, out dd);
-			parseindex -= 2;
-		}
+        if (parseindex > 1 && string.Compare(match.Groups[parseindex - 1].Value, ".") == 0)
+        {
+            int.TryParse(match.Groups[parseindex].Value, out ms);
+            parseindex -= 2;
+        }
+        if (parseindex >= 1)
+        {
+            int.TryParse(match.Groups[parseindex].Value, out ss);
+            parseindex -= 2;
+        }
+        if (parseindex >= 1)
+        {
+            int.TryParse(match.Groups[parseindex].Value, out mm);
+            parseindex -= 2;
+        }
+        if (parseindex >= 1)
+        {
+            int.TryParse(match.Groups[parseindex].Value, out hh);
+            parseindex -= 2;
+        }
+        if (parseindex >= 1)
+        {
+            int.TryParse(match.Groups[parseindex].Value, out dd);
+            parseindex -= 2;
+        }
 
-		TimeSpan duration = new TimeSpan(dd, hh, mm, ss, ms);
-		
-		//TimeSpan duration = TimeSpan.Parse(inString);
+        TimeSpan duration = new TimeSpan(dd, hh, mm, ss, ms);
+
+        //TimeSpan duration = TimeSpan.Parse(inString);
         double totalSeconds = duration.TotalSeconds;
 
         return totalSeconds.ToString();
@@ -325,7 +325,7 @@ class CsvNormalizer
 		*/
         //Note: Cannot guess TotalDuration field without checking input value to be sum of previous durations, and fieldName containing "Total" or "Sum"
 
-		//TODO Following line is a placeholder
+        //TODO Following line is a placeholder
         DataType retval = DataType.UnmodifiedString;
 
         return retval;

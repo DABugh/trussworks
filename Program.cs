@@ -14,14 +14,15 @@ namespace TrussWorks_Test
             Encoding errorEncoding = Encoding.UTF8;
 
             CsvNormalizer normalizer = new CsvNormalizer();
-            
+
             Console.OutputEncoding = outputEncoding;
 
-            using( TextReader inStream = new StreamReader(Console.OpenStandardInput(), inputEncoding) )
+
+            using (TextReader inStream = new StreamReader(Console.OpenStandardInput(), inputEncoding))
             //using( TextReader inStream = new StreamReader("./Instructions/DB-sample-with-broken-utf8.csv", inputEncoding) )
-            using( TextWriter outStream = new StreamWriter(Console.OpenStandardOutput(), outputEncoding) )
+            using (TextWriter outStream = new StreamWriter(Console.OpenStandardOutput(), outputEncoding))
             //using (TextWriter outStream = new StreamWriter("./Instructions/DB-sample-with-broken-utf8.out.csv", false, outputEncoding) )
-            using( TextWriter errStream = new StreamWriter(Console.OpenStandardError(), errorEncoding) )
+            using (TextWriter errStream = new StreamWriter(Console.OpenStandardError(), errorEncoding))
             //using (TextWriter outStream = new StreamWriter("./Instructions/DB-sample-with-broken-utf8.err.csv", false, outputEncoding) )
             {
                 //Columns: Timestamp,Address,ZIP,FullName,FooDuration,BarDuration,TotalDuration,Notes
@@ -35,7 +36,8 @@ namespace TrussWorks_Test
                     CsvNormalizer.DataType.TotalDuration,
                     CsvNormalizer.DataType.UnmodifiedString};
 
-                try{
+                try
+                {
                     normalizer.ColumnTypes = columnTypes;
                     normalizer.Delimiter = ",";
                     normalizer.TimestampOffset = 3;
@@ -43,7 +45,7 @@ namespace TrussWorks_Test
 
                     normalizer.NormalizeCsv(inStream, outStream, outStream);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
