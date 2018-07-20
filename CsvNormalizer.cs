@@ -8,15 +8,17 @@ using System.Text.RegularExpressions;
 //Assumptions:
 //	CSV file has a header row; This row will be validated for proper encoding, but will not be
 //		parsed to conform with ColumnTypes (each header field is assumed to be a string)
-//	Timecodes output as ISO-8601 in eastern time zone
 //	Input data will be ignored for any columns of TotalDuration type,
 //		and value will be recalculated
 //	Any colums of TotalDuration type will be sum of all preceding (but
 //		not subsequent) columns of Duration type
-//	Total record length will not exceed 2048 bytes
-//	Strings containing delimiter are enclosed in double-quotes {"}
-//	Time stamps have no time zone information
+//	Total record length will not exceed 2048 bytes (adjustable default of CsvParser)
+//	Strings containing delimiter are enclosed in double-quotes {"} in input
+//	Time stamps have no time zone information (foundation laid to remove this assumption)
 
+
+//Purpose: Read in delimited spreadsheet, apply rules based on datatypes,
+//  validate character encoding, format data to specified standards, output results
 class CsvNormalizer
 {
     #region ENUMS
@@ -85,8 +87,8 @@ class CsvNormalizer
             errorStream = outStream;
         }
 
-        using (CsvParser csvParser = new CsvParser(inStream))
         using (CsvWriter csvWriter = new CsvWriter(outStream))
+        using (CsvParser csvParser = new CsvParser(inStream))
         {
             csvParser.Configuration.Delimiter = Delimiter;
 
@@ -95,12 +97,13 @@ class CsvNormalizer
             if (record != null)
             {
                 headers = record;
-				//Send headers back to output
+
+                //Send headers back to output
                 for (int i = 0; i < headers.Length; i++)
                 {
                     csvWriter.WriteField(headers[i]);
                 }
-                csvWriter.NextRecord();
+                csvWriter.NextRecordAsync();
             }
             else
             {
@@ -176,9 +179,10 @@ class CsvNormalizer
                         //This will add quotes around the field if it contains the delimiter, then
                         //	convert from UTF-16 (.NET string encoding) to encoding specified for outStream, 
                         csvWriter.WriteField(parsedRecord[i]);
-                    } //for
+                    }
 
                     csvWriter.NextRecord();
+
                 } //try
                 catch (Exception e)
                 {

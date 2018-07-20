@@ -852,23 +852,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DABugh\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/home/dabugh/.nuget/packages/": {},
+    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DABugh\\Repositories\\trussworks\\TrussWorks Test.csproj",
+      "projectUniqueName": "/home/dabugh/Repositories/trussworks/TrussWorks Test.csproj",
       "projectName": "TrussWorks Test",
-      "projectPath": "C:\\Users\\DABugh\\Repositories\\trussworks\\TrussWorks Test.csproj",
-      "packagesPath": "C:\\Users\\DABugh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DABugh\\Repositories\\trussworks\\obj\\",
+      "projectPath": "/home/dabugh/Repositories/trussworks/TrussWorks Test.csproj",
+      "packagesPath": "/home/dabugh/.nuget/packages/",
+      "outputPath": "/home/dabugh/Repositories/trussworks/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\DABugh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/dabugh/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
