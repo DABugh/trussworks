@@ -28,6 +28,10 @@ Dainen.Bugh@gmail.com
 3. Select location to save cloned repository
 4. [Open Repository] on prompt
 
+## Add CsvHelper package
+1. ctrl+` to open integrated terminal
+2. Execute command: "dotnet add package CsvHelper --version 7.1.1"
+
 ## Build and Execute
 1. ctrl+` to open integrated terminal
 2. Execute command: "dotnet run"
