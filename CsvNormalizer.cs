@@ -77,12 +77,12 @@ class CsvNormalizer
     #region PUBLIC METHODS
 
     //Reads in entire stream one record at a time, validates/modifies/formats fields as required, outputs one record at a time
-    public void NormalizeCsv(TextReader inStream, TextWriter outStream,
+    public void NormalizeCsv(TextReader reader, TextWriter writer,
         TextWriter errorStream = null)
     {
         if (errorStream == null)
         {
-            errorStream = outStream;
+            errorStream = writer;
         }
 
         //TODO There seems to be a problem with CsvWriter when using both stdin and stdout.
@@ -93,8 +93,8 @@ class CsvNormalizer
         //  surrounding quotes if necessary, and delimiters would have to be manually added
         //  between each field.
 
-        using (CsvParser csvParser = new CsvParser(inStream))
-        using (CsvWriter csvWriter = new CsvWriter(outStream))
+        using (CsvParser csvParser = new CsvParser(reader))
+        using (CsvWriter csvWriter = new CsvWriter(writer))
         {
             csvParser.Configuration.Delimiter = Delimiter;
 

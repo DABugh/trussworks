@@ -18,12 +18,12 @@ namespace TrussWorks_Test
             Console.OutputEncoding = outputEncoding;
 
 
-            using (TextReader inStream = new StreamReader(Console.OpenStandardInput(), inputEncoding))
-            //using( TextReader inStream = new StreamReader("./Instructions/DB-sample-with-broken-utf8.csv", inputEncoding) )
-            using (TextWriter outStream = new StreamWriter(Console.OpenStandardOutput(), outputEncoding))
-            //using (TextWriter outStream = new StreamWriter("./Instructions/DB-sample-with-broken-utf8.out.csv", false, outputEncoding) )
-            using (TextWriter errStream = new StreamWriter(Console.OpenStandardError(), errorEncoding))
-            //using (TextWriter outStream = new StreamWriter("./Instructions/DB-sample-with-broken-utf8.err.csv", false, outputEncoding) )
+            using (StreamReader inStream = new StreamReader(Console.OpenStandardInput(), inputEncoding))
+            //using( StreamReader inStream = new StreamReader("./Instructions/DB-sample-with-broken-utf8.csv", inputEncoding) )
+            using (StreamWriter outStream = new StreamWriter(Console.OpenStandardOutput(), outputEncoding))
+            //using (StreamWriter outStream = new StreamWriter("./Instructions/DB-sample-with-broken-utf8.out.csv", false, outputEncoding) )
+            using (StreamWriter errStream = new StreamWriter(Console.OpenStandardError(), errorEncoding))
+            //using (StreamWriter outStream = new StreamWriter("./Instructions/DB-sample-with-broken-utf8.err.csv", false, outputEncoding) )
             {
                 //Columns: Timestamp,Address,ZIP,FullName,FooDuration,BarDuration,TotalDuration,Notes
                 List<CsvNormalizer.DataType> columnTypes = new List<CsvNormalizer.DataType>()
