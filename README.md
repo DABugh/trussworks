@@ -30,5 +30,6 @@ Dainen.Bugh@gmail.com
 
 ## Build and Execute
 1. ctrl+` to open integrated terminal
-2. Execute command: "dotnet run"
-3. Enter input. Empty line signals end of input.
+2. Execute command: "dotnet clean"
+3. Execute command: "dotnet run"
+4. Enter input. Empty line signals end of input.
