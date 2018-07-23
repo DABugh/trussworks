@@ -53,7 +53,11 @@ class CsvNormalizer
     #region PRIVATE MEMBERS
 
     //Header labels, as read from the first row; this is used to guess columnTypes if not provided
-    private string[] headers;
+    private string[] Headers;
+
+    //List of records; each record is an array of strings
+    //Contains entire csv except for headers
+    private List<string[]> Records;
 
     #endregion PRIVATE MEMBERS
     #region CONSTRUCTORS
@@ -85,53 +89,51 @@ class CsvNormalizer
             errorStream = writer;
         }
 
-        //TODO There seems to be a problem with CsvWriter when using both stdin and stdout.
-        //  Either one alone works. CsvReader still works, as the values can be written
-        //  with Console.WriteLine(). Values can also be written with outStream.WriteLine(),
-        //  but must be flushed after every statement. If using outStream were a permanent hack,
-        //  each string would have to be checked for the delimiter, and given
-        //  surrounding quotes if necessary, and delimiters would have to be manually added
-        //  between each field.
+        if(ReadCsv(reader, errorStream))
+        {
+            WriteCsv(writer, errorStream);
+        }
+    } //NormalizeCsv()
+
+    #endregion PUBLIC METHODS
+    #region PRIVATE METHODS
+
+    private bool ReadCsv(TextReader reader, TextWriter errorStream)
+    {
+        Records = new List<string[]>();
 
         using (CsvParser csvParser = new CsvParser(reader))
-        using (CsvWriter csvWriter = new CsvWriter(writer))
         {
             csvParser.Configuration.Delimiter = Delimiter;
 
-            string[] record = csvParser.Read();
+            Headers = csvParser.Read();
 
-            if (record != null)
-            {
-                headers = record;
-                //Send headers back to output
-                for (int i = 0; i < headers.Length; i++)
-                {
-                    csvWriter.WriteField(headers[i]);
-                }
-                csvWriter.NextRecord();
-            }
-            else
+            if (Headers == null)
             {
                 errorStream.WriteLine("Error: No input to process.");
-                return;
+                return false;
             }
 
             // Read current line fields, pointer moves to the next line.
-            record = csvParser.Read();
+            string[] record;
 
-            while (record != null)
+            //Read until the parser returns null (EOF)
+            //  Note: CsvParser converts the input using .toString(), which implements the
+            //  built-in type converter based on the specified character encoding of inStream
+            //	(This will correct any invalid characters, then load into a UTF-16 string)
+            while ((record = csvParser.Read()) != null)
             {
                 string[] parsedRecord = new string[record.Length];
 
                 //Before parsing fields, be sure we know (or have tried to guess) the type of each field
                 //This will normally run at most once, on line #2 (first line of data), unless later records have more columns
-                if (ColumnTypes.Count < headers.Length)
+                if (ColumnTypes.Count < Headers.Length)
                 {
                     errorStream.WriteLine("Warning: Some or all column data types were not specified");
 
-                    for (int i = ColumnTypes.Count; i < headers.Length; i++)
+                    for (int i = ColumnTypes.Count; i < Headers.Length; i++)
                     {
-                        ColumnTypes.Add(GuessDataType(record[i], headers[i]));
+                        ColumnTypes.Add(GuessDataType(record[i], Headers[i]));
                     }
                 }
 
@@ -178,15 +180,8 @@ class CsvNormalizer
                         } //switch
                     } //for
 
-                    //Now that all fields are validated, write them all to outStream
-                    for (int i = 0; i < record.Length; i++)
-                    {
-                        //This will add quotes around the field if it contains the delimiter, then
-                        //	convert from UTF-16 (.NET string encoding) to encoding specified for outStream, 
-                        csvWriter.WriteField(parsedRecord[i]);
-                    } //for
-
-                    csvWriter.NextRecord();
+                    //Now that all fields are validated, add them to the list
+                    Records.Add(parsedRecord);
                 } //try
                 catch (Exception e)
                 {
@@ -203,17 +198,40 @@ class CsvNormalizer
                     }
                 } //catch
 
-                //CsvParser converts the input using .toString(), which implements the built-in
-                //	type converter based on the specified character encoding of inStream
-                //	(This will correct any invalid characters, then load into a UTF-16 string)
-                record = csvParser.Read();
-
             } //while
-        } //using
-    } //NormalizeCsv()
 
-    #endregion PUBLIC METHODS
-    #region PRIVATE METHODS
+        } //using
+        
+        return true;
+    } //ReadCsv()
+
+    /// All normalization has already been done; just output entire csv
+    private void WriteCsv(TextWriter writer, TextWriter errorStream)
+    {
+        using (CsvWriter csvWriter = new CsvWriter(writer))
+        {
+            csvWriter.Configuration.Delimiter = Delimiter;
+
+            //Send headers back to output
+            for (int i = 0; i < Headers.Length; i++)
+            {
+                csvWriter.WriteField(Headers[i]);
+            }
+            csvWriter.NextRecord();
+
+            foreach(string[] record in Records)
+            {
+                for (int i = 0; i < record.Length; i++)
+                {
+                    //This will add quotes around the field if it contains the delimiter, then
+                    //	convert from UTF-16 (.NET string encoding) to encoding specified for outStream, 
+                    csvWriter.WriteField(record[i]);
+                }
+
+                csvWriter.NextRecord();
+            }
+        } //using
+    } //WriteCsv()
 
     //Adjust DateTime with an offset, then format
     //TODO: Account for time zone in input string, set to DefaultTimezone (add this as class public property) if not specified in string;
