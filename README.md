@@ -36,4 +36,5 @@ Dainen.Bugh@gmail.com
 1. ctrl+` to open integrated terminal
 2. Execute command: "dotnet clean"
 3. Execute command: "dotnet run"
-4. Enter input. Empty line signals end of input.
+4. Enter input. ctrl+d to signal EOF.
+5. To switch input or output to a file, uncomment and edit appropriate line in Program.cs.
